@@ -47,5 +47,5 @@ func (m UserRepository) GetByID(id int) *User {
 		return &user
 	}
 
-	return
+	return nil
 }
