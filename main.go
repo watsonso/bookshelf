@@ -1,7 +1,7 @@
 package main
 
 import (
-	"bookshelf/controller"
+	"bookshelf/controllers"
 	"github.com/gin-gonic/gin"
 	"reflect"
 	"strconv"
