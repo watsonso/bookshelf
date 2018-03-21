@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"bookshelf/models"
+	"github.com/watsonso/bookshelf/models"
 )
 
 // User is
