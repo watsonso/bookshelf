@@ -1,18 +1,35 @@
 package main
 
 import (
+	"bookshelf/controllers"
 	"github.com/gin-gonic/gin"
+	"reflect"
+	"strconv"
 )
 
 func main() {
-	r := gin.Default()
-	// 1. http://localhost:8080/ へアクセスすると「Hello world」と表示する。
-	r.GET("/", func(c *gin.Context) {
-		c.String(200, "Hello world")
+	router := gin.Default()
+	router.Get("/:id", func(c *gin.Context) {
+		// process param
+		n := c.Param("id")
+		id, err := strconv.Atoi(n)
+		if err != nil {
+			c.JSON(400, err)
+			return
+		}
+		if id <= 0 {
+			c.JSON(400, gin.H{"status": "id should be bigger than 0"})
+			return
+		}
+		// process data
+		ctrl := controllers.NewUser()
+		result := ctrl.Get(id)
+		if result == nil || reflect.ValueOf(result).IsNil() {
+			c.JSON(404, gin.H{})
+			return
+		}
+
+		c.JSON(200, result)
 	})
-	//2. http://localhost:8080/hoge へアクセスすると、「fuga」と表示する。
-	r.GET("/hoge", func(c *gin.Context) {
-		c.String(200, "fuga")
-	})
-	r.Run(":8080")
+	router.Run(":8080")
 }
