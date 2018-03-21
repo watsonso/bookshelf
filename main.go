@@ -9,7 +9,7 @@ import (
 
 func main() {
 	router := gin.Default()
-	router.Get("/:id", func(c *gin.Context) {
+	router.GET("/:id", func(c *gin.Context) {
 		// process param
 		n := c.Param("id")
 		id, err := strconv.Atoi(n)
