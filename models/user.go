@@ -10,7 +10,7 @@ var engine *xorm.Engine
 // init ...
 func init() {
 	var err error
-	engine, err = xorm.NewEngine("mysql", "fuga:pass@/bookshelf")
+	engine, err = xorm.NewEngine("mysql", "root:@/bookshelf")
 	if err != nil {
 		panic(err)
 	}
