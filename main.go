@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/watsonso/bookshelf/controllers"
+	_ "net/http"
 	"reflect"
 	"strconv"
 )
@@ -30,6 +31,16 @@ func main() {
 		}
 
 		c.JSON(200, result)
+	})
+	router.POST("/form_post", func(c *gin.Context) {
+		message := c.PostForm("message")
+		nick := c.DefaultPostForm("nick", "anonymous")
+
+		c.JSON(200, gin.H{
+			"status":  "posted",
+			"message": message,
+			"nick":    nick,
+		})
 	})
 	router.Run(":8080")
 }
