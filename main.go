@@ -6,32 +6,41 @@ import (
 	"net/http"
 	_"reflect"
 	_"strconv"
+	"fmt"
 )
 
 func main() {
 	router := gin.Default()
+	fmt.Println("check 1")
 	router.LoadHTMLGlob("views/*")
+	fmt.Println("check 2")
 	router.GET("/", func(c *gin.Context) {
-		ctrl := task.NewTask()
+		ctrl := controllers.NewTask()
+		fmt.Println("check get")
 
 		tasks := ctrl.GetAll()
 
+		fmt.Println("check get2", tasks)
 		c.HTML(http.StatusOK, "home.tmpl", gin.H{
-			"task": tasks;
+			"task": tasks,
 		})
 	})
 
 	router.POST("/", func(c *gin.Context) {
 		text := c.PostForm("text")
 
-		ctrl := task.NewTask()
+		ctrl := controllers.NewTask()
 
+		fmt.Println("check text", text)
+		//if text == '' {
+		//
+		//}
 		ctrl.Create(text)
 
 		tasks := ctrl.GetAll()
 
 		c.HTML(http.StatusOK, "home.tmpl", gin.H{
-			"tasks": tasks;
+			"tasks": tasks,
 		})
 	})
 
@@ -57,5 +66,6 @@ func main() {
 
 	//	c.JSON(200, result)
 	//})
+	fmt.Println("check 3")
 	router.Run(":8080")
 }
