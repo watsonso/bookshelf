@@ -6,32 +6,35 @@ import (
 	"net/http"
 	_"reflect"
 	_"strconv"
+	"fmt"
 )
 
 func main() {
 	router := gin.Default()
 	router.LoadHTMLGlob("views/*")
-	router.GET("/", func(c *gin.Context) {
-		ctrl := task.NewTask()
 
-		tasks := ctrl.GetAll()
-
-		c.HTML(http.StatusOK, "home.tmpl", gin.H{
-			"task": tasks;
-		})
-	})
-
-	router.POST("/", func(c *gin.Context) {
+	router.POST("/post", func(c *gin.Context) {
 		text := c.PostForm("text")
 
-		ctrl := task.NewTask()
+		ctrl := controllers.NewTask()
 
+		if text == "" {
+			c.Redirect(http.StatusMovedPermanently, "/")
+			c.Abort()
+		}
 		ctrl.Create(text)
+
+		c.Redirect(http.StatusMovedPermanently, "/")
+
+	})
+
+	router.GET("/", func(c *gin.Context) {
+		ctrl := controllers.NewTask()
 
 		tasks := ctrl.GetAll()
 
 		c.HTML(http.StatusOK, "home.tmpl", gin.H{
-			"tasks": tasks;
+			"tasks": tasks,
 		})
 	})
 

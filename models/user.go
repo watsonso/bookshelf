@@ -1,8 +1,6 @@
 package models
 
 import (
-	"fmt"
-
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/go-xorm/xorm"
 )
@@ -45,7 +43,6 @@ func NewUserRepository() UserRepository {
 func (m UserRepository) GetByID(id int) *User {
 	var user = User{ID: id}
 	has, _ := engine.Get(&user)
-	fmt.Println(&user)
 	if has {
 		return &user
 	}
