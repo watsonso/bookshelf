@@ -1,9 +1,8 @@
 package models
 
 import (
-	"github.com/go-xorm/xorm"
 	_ "github.com/go-sql-driver/mysql"
-	"fmt"
+	"github.com/go-xorm/xorm"
 )
 
 //var engine *xorm.Engine
@@ -12,14 +11,13 @@ func init() {
 	var err error
 
 	engine, err = xorm.NewEngine("mysql", "root:@/gin-todo")
-	fmt.Println("check engine", engine)
 	if err != nil {
 		panic(err)
 	}
 }
 
 type Task struct {
-	ID   int  `json:"id" xorm:"'id'"`
+	ID   int    `json:"id" xorm:"'id'"`
 	Text string `json:"text" xorm:"'text'"`
 }
 
@@ -43,7 +41,7 @@ func (m TaskRepository) GetByID(id int) *Task {
 	if has {
 		return &task
 	}
-	 return nil
+	return nil
 }
 
 func (m TaskRepository) GetAll() Tasks {
