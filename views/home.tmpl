@@ -1,11 +1,29 @@
 <html>
 	<head>
 		<title>{{ .title }}</title>
+        <script type="text/javascript">
+
+			function check() {
+			    var flag = 0;
+			    if (document.form1.text.value === "") {
+			        flag = 1;
+				}
+
+				if (flag) {
+			        window.alert('未入力がありました');
+			        return false;
+				} else {
+			        return true;
+				}
+			}
+
+		</script>
   </head>
 <body>
 	<h1>{{ .title }}</h1>
-	<form action="/post" method="post">
+	<form action="/post" method="post" name="form1" onSubmit="return check()">
 		<input type="text" name="text">
+		<button type="submit" name="action" value="send">送信</button>
 	</form>
   <ul>
   	{{ range $index, $task := .tasks }}
