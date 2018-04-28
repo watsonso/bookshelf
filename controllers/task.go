@@ -27,3 +27,8 @@ func (c Task) Create(text string) {
 	repo := models.NewTaskRepository()
 	repo.Create(text)
 }
+
+func (c Task) Delete(id int) {
+	repo := models.NewTaskRepository()
+	repo.Delete(id)
+}

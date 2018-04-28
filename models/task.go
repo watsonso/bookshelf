@@ -35,6 +35,10 @@ func (m TaskRepository) Create(text string) {
 	engine.Insert(&task)
 }
 
+func (m TaskRepository) Delete(id int) {
+
+}
+
 func (m TaskRepository) GetByID(id int) *Task {
 	var task = Task{ID: id}
 	has, _ := engine.Get(&task)

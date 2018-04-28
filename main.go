@@ -6,6 +6,7 @@ import (
 	"net/http"
 	_"reflect"
 	_"strconv"
+	"fmt"
 )
 
 func main() {
@@ -24,6 +25,13 @@ func main() {
 		ctrl.Create(text)
 
 		c.Redirect(http.StatusMovedPermanently, "/")
+
+	})
+
+	router.POST("/delete/:id", func(c *gin.Context) {
+
+		ctrl := controllers.NewTask()
+		fmt.Println("check", ctrl)
 
 	})
 
