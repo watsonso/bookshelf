@@ -6,7 +6,6 @@ import (
 	"net/http"
 	_"reflect"
 	_"strconv"
-	"fmt"
 )
 
 func main() {
@@ -29,9 +28,17 @@ func main() {
 	})
 
 	router.POST("/delete/:id", func(c *gin.Context) {
+		n := c.Param("id")
+		_ = n
 
 		ctrl := controllers.NewTask()
-		fmt.Println("check", ctrl)
+		ctrl.Delete(49)
+
+		tasks := ctrl.GetAll()
+
+		c.HTML(http.StatusOK, "home.tmpl", gin.H{
+			"tasks": tasks,
+		})
 
 	})
 

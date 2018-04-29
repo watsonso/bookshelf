@@ -36,6 +36,10 @@
 		<input type="text" name="text">
 		<button type="submit" name="action" value="send">送信</button>
 	</form>
+    <form action="/delete/:id" method="post" name="form1" onSubmit="return check()">
+        <input type="text" name="text">
+        <button type="submit" name="action" value="send">削除</button>
+    </form>
   <ul>
   	{{ range $index, $task := .tasks }}
   	  <li>{{ $index }}: {{ $task.Text }} </li>
