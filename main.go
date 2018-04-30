@@ -4,8 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/watsonso/bookshelf/controllers"
 	"net/http"
-	_"reflect"
-	_"strconv"
+	"strconv"
 )
 
 func main() {
@@ -27,12 +26,12 @@ func main() {
 
 	})
 
-	router.POST("/delete/:id", func(c *gin.Context) {
-		n := c.Param("id")
-		_ = n
+	router.POST("/delete", func(c *gin.Context) {
+		stringID := c.PostForm("id")
 
 		ctrl := controllers.NewTask()
-		ctrl.Delete(49)
+		id, _ := strconv.Atoi(stringID)
+		ctrl.Delete(id)
 
 		tasks := ctrl.GetAll()
 
