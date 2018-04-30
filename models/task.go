@@ -36,6 +36,8 @@ func (m TaskRepository) Create(text string) {
 }
 
 func (m TaskRepository) Delete(id int) {
+	var task = Task{ID: id}
+	engine.Delete(&task)
 
 }
 

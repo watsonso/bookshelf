@@ -4,9 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/watsonso/bookshelf/controllers"
 	"net/http"
-	_"reflect"
-	_"strconv"
-	"fmt"
+	"strconv"
 )
 
 func main() {
@@ -28,10 +26,18 @@ func main() {
 
 	})
 
-	router.POST("/delete/:id", func(c *gin.Context) {
+	router.POST("/delete", func(c *gin.Context) {
+		stringID := c.PostForm("id")
 
 		ctrl := controllers.NewTask()
-		fmt.Println("check", ctrl)
+		id, _ := strconv.Atoi(stringID)
+		ctrl.Delete(id)
+
+		tasks := ctrl.GetAll()
+
+		c.HTML(http.StatusOK, "home.tmpl", gin.H{
+			"tasks": tasks,
+		})
 
 	})
 
